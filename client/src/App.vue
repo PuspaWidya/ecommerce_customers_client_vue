@@ -11,10 +11,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-item nav-link active">
-            <router-link to="/about"> About </router-link>
-            <span class="sr-only">(current)</span></a>
-          <a href="#" class="nav-item nav-link active" @click.prevent="logout"> Logout </a>
+          <a class="nav-item nav-link ">
+            <router-link to="/products"> About </router-link></a>
+              <a class="nav-item nav-link ">
+            <router-link to="/cart"> Show Your Cart </router-link></a>
+          <a href="#" class="nav-item nav-link " @click.prevent="logout"> Logout </a>
         </div>
        </div>
      </nav>

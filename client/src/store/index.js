@@ -40,7 +40,7 @@ export default new Vuex.Store({
         if (data) {
           localStorage.setItem('access_token', data.access_token)
           console.log('berhasil logged in!')
-          router.push('/home')
+          router.push('/products')
         } else {
           console.log('wrong email or password')
         }
@@ -73,18 +73,17 @@ export default new Vuex.Store({
       localStorage.removeItem('access_token')
       router.push('/')
     },
-    fetchProducts(context, payload) {
+    fetchProduct (context, payload) {
       axios({
         method: 'get',
-        url: url + 'server',
+        url: url + 'products',
         headers: {
-          access_token : localStorage.getItem('access_token')
+          access_token: localStorage.getItem('access_token')
         }
       }).then(({ data }) => {
+        console.log('asasaaa')
         if (data) {
-          context.commit('fetchProducts',data)
-          console.log('berhasil di fetch!')
-          console.log(state.products)
+          context.commit('fetchProducts', data)
         } else {
           console.log('tidak ada data')
         }
@@ -93,20 +92,44 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
-    deleteCart(context,payload) {
+    fetchCart (context, payload) {
+      axios({
+        method: 'get',
+        url: url + 'server',
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      }).then(({ data }) => {
+        console.log('chart jalan')
+        if (data) {
+          context.commit('fetchCart', data)
+          console.log('berhasil di fetch!')
+          console.log(data)
+        } else {
+          console.log('tidak ada data')
+        }
+      })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    deleteCart (context, payload) {
       axios({
         method: 'delete',
-        url: url + `server/${payload.id}`,
+        url: url + 'server',
         headers: {
-          access_token : localStorage.getItem('access_token')
+          access_token: localStorage.getItem('access_token')
         },
-        data :{
-          ProductId : payload.ProductId
+        data: {
+          ProductId: payload.ProductId,
+          id: payload.id
         }
-      }).then(_ => {
-          console.log('data has been deleted')
-          router.push('/home')
       })
+        .then(_ => {
+          console.log('data has been deleted')
+          // router.push('/products')
+          router.go('/cart')
+        })
         .catch(err => {
           console.log(err)
         })
@@ -114,21 +137,51 @@ export default new Vuex.Store({
     addCart (context, payload) {
       axios({
         method: 'post',
-        url: '/server',
+        url: url + 'server/' + payload,
         headers: {
-          acess_token: localStorage.getItem('access_token')
+          access_token: localStorage.getItem('access_token')
         },
-       data:payload
+        data: {
+          id: payload
+        }
       })
         .then(({ data }) => {
           console.log(data)
-          console.log('berhasil di buat?')
-          router.push('/products')
+          console.log('berhasil di buat')
+          router.go('/cart')
+          // this.$router.go('/products')
+          // this.$router.reload()
+          // this.history.current()
         })
         .catch(err => {
           console.log(err)
         })
     },
+    updateCart (context, payload) {
+      axios({
+        method: 'patch',
+        url: url + 'server',
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        },
+        data: {
+          id: payload.id,
+          amount: payload.amount,
+          ProductId: payload.ProductId
+        }
+      })
+        .then(({ data }) => {
+          console.log(data)
+          console.log('berhasil di update?')
+          // router.push('/cart')
+          // router.push('/cart')
+          router.go('/products')
+          // router.reload()
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
   },
   modules: {
   }

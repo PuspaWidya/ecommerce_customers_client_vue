@@ -1,50 +1,66 @@
 <template>
-  <div>
-  <navbar/>
-  <div class="row d-flex justify-content-center" >
-    <!--Grid column-->
-    <div class="col-lg-8">
-      <!-- Card -->
-      <div class="mb-3">
-        <div class="pt-4 wish-list">
-          <h5 class="mb-4 cart">Your Cart:</h5>
-          <div class="row mb-4">
-            <div class="col-md-7 col-lg-9 col-xl-9">
-              <cart-body>
-                cart disini
-              </cart-body>
-            </div>
-          </div>
-        </div>
+<div class="container">
+  <div class="products">
+    <div class="container">
+      <div class="hero-image">
+      <div class="hero-text">
+        <h1>This is your cart page</h1>
       </div>
     </div>
+    <div class="row">
+      <CartBody
+      v-for="cart in carts"
+      :key="cart.id"
+      :cart="cart"></CartBody>
   </div>
+  </div>
+</div>
 </div>
 </template>
 
 <script>
+import CartBody from '../components/CartBody.vue'
 
 export default {
   name: 'Cart',
   methods: {
     fetchCart () {
       console.log('mengambil data di cart')
-    //   this.$store.dispatch('fetchCart')
+      this.$store.dispatch('fetchCart')
     }
   },
   created () {
     this.fetchCart()
   },
   computed: {
+    carts () {
+      return this.$store.state.cart
+    }
+  },
+  components: {
+    CartBody
   }
 }
 </script>
 
-<style>
-.cart{
-  background-image:linear-gradient(45deg, #ff00c4, #8000ff);
-  color:white;
-  border-radius: 25px;
-  box-shadow: 0px 0px 10px #81007c, 0px 0px 30px #81007c;
+<style scoped>
+.hero-image {
+  background-image: url("https://images.unsplash.com/photo-1609644942858-7183f459eba4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=358&q=80");
+  height: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  padding: 200px;
 }
+
+.hero-text {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
 </style>
