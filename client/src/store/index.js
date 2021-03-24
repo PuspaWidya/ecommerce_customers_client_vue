@@ -13,13 +13,6 @@ export default new Vuex.Store({
     products: []
   },
   mutations: {
-    changeLoggedIn (state) {
-      if (localStorage.access_token) {
-        state.loggedIn = true
-      } else {
-        state.loggedIn = false
-      }
-    },
     fetchCart (state, payload) {
       state.cart = payload
     },
@@ -127,8 +120,7 @@ export default new Vuex.Store({
       })
         .then(_ => {
           console.log('data has been deleted')
-          // router.push('/products')
-          router.go('/cart')
+          // router.push('/products') //!
         })
         .catch(err => {
           console.log(err)
@@ -148,7 +140,7 @@ export default new Vuex.Store({
         .then(({ data }) => {
           console.log(data)
           console.log('berhasil di buat')
-          router.go('/cart')
+          // ?
           // this.$router.go('/products')
           // this.$router.reload()
           // this.history.current()
@@ -173,10 +165,7 @@ export default new Vuex.Store({
         .then(({ data }) => {
           console.log(data)
           console.log('berhasil di update?')
-          // router.push('/cart')
-          // router.push('/cart')
-          router.go('/products')
-          // router.reload()
+          //!
         })
         .catch(err => {
           console.log(err)

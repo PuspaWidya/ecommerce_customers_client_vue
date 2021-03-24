@@ -25,7 +25,6 @@ export default {
   name: 'Cart',
   methods: {
     fetchCart () {
-      console.log('mengambil data di cart')
       this.$store.dispatch('fetchCart')
     }
   },

@@ -17,10 +17,15 @@ export default {
   props: ['product'],
   methods: {
     chart (payload) {
-      console.log(payload)
+      // console.log(payload)
       this.$store.dispatch('addCart', payload)
-      // this.$router.push('/cart')
+        .then(_ => {
+          this.$store.dispatch('fetchProduct')
+        })
     }
+  },
+  created () {
+    this.$store.dispatch('fetchProduct')
   }
 }
 </script>

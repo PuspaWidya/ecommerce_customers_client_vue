@@ -25,22 +25,27 @@ export default {
   props: ['cart'],
   methods: {
     chart (payload) {
-      // console.log(payload)
-      // console.log(this.cart.ProductId)
-      // console.log(this.cart.id)
       this.$store.dispatch('updateCart', {
         amount: payload,
         ProductId: this.cart.ProductId,
         id: this.cart.id
       })
+        .then(_ => {
+          console.log('tes')
+          this.$store.dispatch('fetchCart')
+        })
     },
     deleteCart () {
-      console.log(this.cart.ProductId)
-      console.log(this.cart.id)
       this.$store.dispatch('deleteCart', {
         ProductId: this.cart.ProductId,
         id: this.cart.id
       })
+        .then(_ => {
+          this.$store.dispatch('fetchCart')
+        })
+    },
+    created () {
+      this.$store.dispatch('fetchCart')
     }
   }
 }
