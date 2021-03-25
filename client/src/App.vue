@@ -5,7 +5,7 @@
       <router-link to="/about">About</router-link> -->
        <div class="container">
         <nav class="navbar navbar-expand-lg" style="background-color:">
-        <a class="navbar-brand" href="#" style="color:white">Navbar</a>
+        <a class="navbar-brand" href="#" style="color:white"> Rose Gold</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
@@ -13,9 +13,11 @@
         <div class="navbar-nav">
           <a class="nav-item nav-link ">
             <router-link to="/"> Products </router-link></a>
-              <a class="nav-item nav-link ">
+             <a v-if="!$store.state.loggedIn" class="nav-item nav-link">
+            <router-link to="/login"> Login</router-link></a>
+              <a v-if="$store.state.loggedIn" class="nav-item nav-link ">
             <router-link to="/cart"> Show Your Cart </router-link></a>
-          <a href="#" class="nav-item nav-link " @click.prevent="logout"> Logout </a>
+          <a  v-if="$store.state.loggedIn" href="#" class="nav-item nav-link " @click.prevent="logout"> Logout </a>
         </div>
        </div>
      </nav>
@@ -32,6 +34,13 @@ export default {
     logout () {
       console.log('masuk logout')
       this.$store.dispatch('logout')
+    }
+  },
+  created () {
+    if (localStorage.getItem('access_token')) {
+      this.$store.commit('setLogIn', true)
+    } else {
+      this.$store.commit('setLogIn', false)
     }
   }
 }

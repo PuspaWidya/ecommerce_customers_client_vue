@@ -18,6 +18,9 @@ export default new Vuex.Store({
     },
     fetchProducts (state, payload) {
       state.products = payload
+    },
+    setLogIn (state, payload) {
+      state.loggedIn = payload
     }
   },
   actions: {
@@ -32,6 +35,7 @@ export default new Vuex.Store({
       }).then(({ data }) => {
         if (data) {
           localStorage.setItem('access_token', data.access_token)
+          context.commit('setLogIn', true)
           console.log('berhasil logged in!')
           router.push('/')
         } else {
@@ -64,6 +68,7 @@ export default new Vuex.Store({
     },
     logout (context) {
       localStorage.removeItem('access_token')
+      context.commit('setLogIn', false)
       router.push('/')
     },
     fetchProduct (context, payload) {

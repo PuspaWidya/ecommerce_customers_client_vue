@@ -24,14 +24,21 @@ const routes = [
       if (!localStorage.getItem('access_token')) {
         next()
       } else {
-        next('/products')
+        next('/')
       }
     }
   },
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: Login,
+    beforeEnter: (to, from, next) => {
+      if (!localStorage.getItem('access_token')) {
+        next()
+      } else {
+        next('/')
+      }
+    }
   },
   {
     path: '/cart',

@@ -1,3 +1,6 @@
+npm heroku bash (untuk database)
+
+
 npm run build
 firebase-init -> waktu setting project(1x)
 firebase deploy
