@@ -9,16 +9,9 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/products',
+    path: '/',
     name: 'Product',
-    component: Product,
-    beforeEnter: (to, from, next) => {
-      if (localStorage.getItem('access_token')) {
-        next()
-      } else {
-        next('/')
-      }
-    }
+    component: Product
   },
   {
     path: '/register',
@@ -36,7 +29,7 @@ const routes = [
     }
   },
   {
-    path: '/',
+    path: '/login',
     name: 'Login',
     component: Login
   },

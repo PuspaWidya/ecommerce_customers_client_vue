@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import router from '../router'
-const url = 'http://localhost:3000/'
+const url = 'https://e-com-client-customer-puspa.herokuapp.com/'
 
 Vue.use(Vuex)
 
@@ -33,7 +33,7 @@ export default new Vuex.Store({
         if (data) {
           localStorage.setItem('access_token', data.access_token)
           console.log('berhasil logged in!')
-          router.push('/products')
+          router.push('/')
         } else {
           console.log('wrong email or password')
         }
@@ -53,7 +53,7 @@ export default new Vuex.Store({
       }).then(data => {
         if (data) {
           console.log('berhasil register!')
-          router.push('/')
+          router.push('/login')
         } else {
           console.log('wrong email or password')
         }
@@ -69,12 +69,8 @@ export default new Vuex.Store({
     fetchProduct (context, payload) {
       axios({
         method: 'get',
-        url: url + 'products',
-        headers: {
-          access_token: localStorage.getItem('access_token')
-        }
+        url: url + 'showProducts'
       }).then(({ data }) => {
-        console.log('asasaaa')
         if (data) {
           context.commit('fetchProducts', data)
         } else {

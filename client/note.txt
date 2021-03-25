@@ -1,0 +1,6 @@
+npm run build
+firebase-init -> waktu setting project(1x)
+firebase deploy
+
+npm run build
+firebase deploy -> jika ada perubahan

@@ -46,7 +46,7 @@ export default {
       })
     },
     login () {
-      this.$router.push('/')
+      this.$router.push('/login')
     }
   }
 }

@@ -12,7 +12,7 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <a class="nav-item nav-link ">
-            <router-link to="/products"> About </router-link></a>
+            <router-link to="/"> Products </router-link></a>
               <a class="nav-item nav-link ">
             <router-link to="/cart"> Show Your Cart </router-link></a>
           <a href="#" class="nav-item nav-link " @click.prevent="logout"> Logout </a>
